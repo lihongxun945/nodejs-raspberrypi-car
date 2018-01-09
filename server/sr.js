@@ -6,8 +6,8 @@ class SR {
   }
 
   init () {
-    rpio.open(13, rpio.OUTPUT)
-    rpio.open(15, rpio.INPUT)
+    rpio.open(13, rpio.INPUT)
+    rpio.open(15, rpio.OUTPUT)
 
     setInterval(() => {
       this.detect()
