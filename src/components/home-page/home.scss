@@ -1,0 +1,22 @@
+@import '../variables.scss';
+
+.homePage {
+  padding: 15px;
+  h1 {
+    font-size: 1.5rem;
+    color: $colorPrimary;
+    margin: 1rem;
+    text-align: center;
+  }
+
+  p {
+    margin: 15px 0;
+  }
+}
+
+.footer {
+  position: fixed;
+  bottom: 10px;
+  left: 0;
+  width: 100%;
+}
