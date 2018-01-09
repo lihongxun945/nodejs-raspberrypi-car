@@ -1,6 +1,7 @@
 const driver = require('./driver.js')
 const Observer = require('./observer.js')
 const utils = require('./utils.js')
+const SR = require('./sr.js')
 
 class Captain {
   constructor() {
@@ -10,6 +11,7 @@ class Captain {
   }
 
   init () {
+    this.sr = new SR()
     this.observer = new Observer({
       onObstacle: () => {
         if (!this._start || !this._driving) {
