@@ -10,7 +10,7 @@ const b = [1, 0, 1, 0]
 const l = [0, 1, 1, 0]
 const r = [1, 0, 0, 1]
 
-const turnDuration = 700
+const turnDuration = 220
 
 class Driver {
   constructor() {

@@ -32,6 +32,16 @@ class HomePage extends React.Component {
           </FlexItem>
           <FlexItem></FlexItem>
         </Flex>
+        <Flex>
+          <FlexItem>
+            <Button type="primary" onClick={ () => this.go(2) }>手动控制</Button>
+          </FlexItem>
+          <FlexItem>
+          </FlexItem>
+          <FlexItem>
+            <Button type="primary" onClick={ () => this.go(2) }>自动驾驶</Button>
+          </FlexItem>
+        </Flex>
         <Footer className={styles.footer}>
           <FooterText>Copyright &copy; 言川 2018</FooterText>
         </Footer>
