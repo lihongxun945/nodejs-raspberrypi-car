@@ -8,6 +8,8 @@ const b = [1, 0, 1, 0]
 const l = [0, 1, 1, 0]
 const r = [1, 0, 0, 1]
 
+const turnDuration = 500
+
 class Driver {
   constructor() {
     this.init()
@@ -52,6 +54,7 @@ class Driver {
     })
   }
 
+  // 左转 45C
   left (cb) {
     console.log('turn left')
     pins.forEach((p, i) => {
@@ -59,19 +62,22 @@ class Driver {
     })
 
     setTimeout(() => {
+      this.stop()
       cb()
-    }, 500)
+    }, turnDuration)
   }
 
+  // 右转 45C
   right (cb) {
-    console.log('right')
+    console.log('turn right')
     pins.forEach((p, i) => {
       rpio.write(p, r[i])
     })
 
     setTimeout(() => {
+      this.stop()
       cb()
-    }, 500)
+    }, turnDuration)
   }
 
   stop (cb) {

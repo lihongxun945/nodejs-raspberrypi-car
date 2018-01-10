@@ -11,7 +11,7 @@ class Captain {
   }
 
   init () {
-    this.sr = new SR()
+    // this.sr = new SR()
     this.observer = new Observer({
       onObstacle: () => {
         if (!this._start || !this._driving) {
@@ -35,9 +35,13 @@ class Captain {
       } else {
       // 否则，获取一个可以通行的方向，并转向，然后再次进行判断
         this.observer.getAvailableDir((d) => {
-          driver.go(d, () => { // 转向，然后检测是否可以通行
-            this.go()
-          })
+          if (d === 0) { // 可能由于障碍物移动，导致前方又可以通行
+            this.go() 
+          } else { // 转向，然后检测是否可以通行
+            driver.go(d, () => {
+              this.go()
+            })
+          }
         })
       }
     })

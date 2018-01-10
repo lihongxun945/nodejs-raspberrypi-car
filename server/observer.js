@@ -25,14 +25,16 @@ class Observer {
   getAvailableDir (cb) {
     console.log('finding available direction')
     setTimeout(() => {
-      const d = utils.rand(4)
+      const d = [0, 1, 3][utils.rand(3)]
       console.log(`available dir: ${d}`)
       cb(d)
     }, 2000)
   }
 
   isAvailable (cb) { // 前方是否可以通行
-    cb(utils.rand(2))
+    const r = !!utils.rand(2)
+    console.log(`is available: ${r}`)
+    cb(r)
   }
 }
 
