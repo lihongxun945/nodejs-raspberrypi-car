@@ -2,13 +2,15 @@ const rpio = require('rpio')
 
 const pins = [11, 12, 15, 16]
 
+const enablePins = [31, 32]
+
 const s = [0, 0, 0, 0]
 const f = [0, 1, 0, 1]
 const b = [1, 0, 1, 0]
 const l = [0, 1, 1, 0]
 const r = [1, 0, 0, 1]
 
-const turnDuration = 500
+const turnDuration = 700
 
 class Driver {
   constructor() {
@@ -17,7 +19,11 @@ class Driver {
 
   init () {
     pins.forEach((p, i) => {
-      rpio.open(p, 0)
+      rpio.open(p, rpio.OUTPUT)
+    })
+    enablePins.forEach((p) => {
+      rpio.open(p, rpio.OUTPUT)
+      rpio.write(p, 1)
     })
   }
 
@@ -63,7 +69,7 @@ class Driver {
 
     setTimeout(() => {
       this.stop()
-      cb()
+      cb && cb()
     }, turnDuration)
   }
 
@@ -76,7 +82,7 @@ class Driver {
 
     setTimeout(() => {
       this.stop()
-      cb()
+      cb && cb()
     }, turnDuration)
   }
 

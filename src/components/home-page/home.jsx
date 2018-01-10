@@ -1,19 +1,37 @@
 import React from 'react'
 import styles from './home.scss'
-import { Page, Button, Footer, FooterText } from 'react-weui'
+import { Page, Button, Footer, FooterText, Flex, FlexItem } from 'react-weui'
 
 class HomePage extends React.Component {
   render () {
     return (
       <Page className={styles.homePage}>
         <h1>Raspberrypi Car</h1>
-        <p>
-          <Button type="primary" onClick={ () => this.start() }>Start</Button>
-        </p>
-        <p>
-          <Button type="warn" onClick={ () => this.stop() }>Stop</Button>
-        </p>
-
+        <Flex>
+          <FlexItem></FlexItem>
+          <FlexItem>
+            <Button type="primary" onClick={ () => this.go(0) }>前进</Button>
+          </FlexItem>
+          <FlexItem></FlexItem>
+        </Flex>
+        <Flex>
+          <FlexItem>
+            <Button type="primary" onClick={ () => this.go(3) }>左转</Button>
+          </FlexItem>
+          <FlexItem>
+            <Button type="warn" onClick={ () => this.go(-1) }>Stop</Button>
+          </FlexItem>
+          <FlexItem>
+            <Button type="primary" onClick={ () => this.go(1) }>右转</Button>
+          </FlexItem>
+        </Flex>
+        <Flex>
+          <FlexItem></FlexItem>
+          <FlexItem>
+            <Button type="primary" onClick={ () => this.go(2) }>后退</Button>
+          </FlexItem>
+          <FlexItem></FlexItem>
+        </Flex>
         <Footer className={styles.footer}>
           <FooterText>Copyright &copy; 言川 2018</FooterText>
         </Footer>
@@ -21,10 +39,8 @@ class HomePage extends React.Component {
     )
   }
 
-  start() {
-  }
-
-  stop () {
+  go(dir) {
+    fetch(`/api/go/${dir}`)
   }
 }
 

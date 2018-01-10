@@ -1,14 +1,13 @@
 const express = require('express')
-const captain = require('./captain.js')
+const driver = require('./driver.js')
+// const captain = require('./captain.js')
 
 const router = express.Router()
 
-router.get('/api/start', (req, res) => {
-  res.send(captain.start())
-})
-
-router.get('/api/stop', (req, res) => {
-  res.send(captain.stop())
+router.get('/api/go/:dir', (req, res) => {
+  const dir = parseInt(req.params.dir)
+  console.log(`dir: ${dir}`)
+  driver.go(dir)
 })
 
 module.exports = router
