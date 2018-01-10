@@ -28,7 +28,7 @@ class Observer {
 
   getAvailableDir (cb) {
     setTimeout(() => {
-      const d = [1, 3][utils.rand(2)]
+      const d = 1
       console.log(`available dir: ${d}`)
       cb(d)
     }, 2000)
