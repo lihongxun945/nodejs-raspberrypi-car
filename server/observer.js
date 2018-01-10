@@ -1,6 +1,9 @@
 const rpio = require('rpio')
 const utils = require('./utils.js')
 
+const SR = require('./sr.js')
+const threshold = 50 // 小于这个值，认为碰到障碍物
+
 class Observer {
   constructor(options) {
     this.options = options || {
@@ -10,29 +13,24 @@ class Observer {
   }
 
   init () {
+    this.sr = new SR()
     setInterval(() => {
-      if(utils.rand(4) === 0) {
-        const onObstacle = this.options.onObstacle
-
-        if (onObstacle) {
-          console.log('on obstacle')
-          onObstacle()
-        }
+      if (this.sr.distance <= threshold) {
+        this.options.onObstacle()
       }
-    }, 1000)
+    }, 50)
   }
 
   getAvailableDir (cb) {
-    console.log('finding available direction')
     setTimeout(() => {
-      const d = [0, 1, 3][utils.rand(3)]
+      const d = [1, 3][utils.rand(2)]
       console.log(`available dir: ${d}`)
       cb(d)
     }, 2000)
   }
 
   isAvailable (cb) { // 前方是否可以通行
-    const r = !!utils.rand(2)
+    const r = this.sr.distance > threshold
     console.log(`is available: ${r}`)
     cb(r)
   }

@@ -17,6 +17,7 @@ class Captain {
         if (!this._start || !this._driving) {
           // already stopped
         } else {
+          console.log('on obstacle')
           this._driving = false
           driver.stop(() => {
             this.go()
