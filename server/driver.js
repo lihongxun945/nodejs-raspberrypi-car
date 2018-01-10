@@ -10,7 +10,10 @@ const b = [1, 0, 1, 0]
 const l = [0, 1, 1, 0]
 const r = [1, 0, 0, 1]
 
-const turnDuration = 220
+
+const speed = 4 // 1~20
+
+const turnDuration = 150 * (20/speed)
 
 class Driver {
   constructor() {
@@ -22,9 +25,18 @@ class Driver {
       rpio.open(p, rpio.OUTPUT, 0)
     })
     enablePins.forEach((p) => {
-      rpio.open(p, rpio.OUTPUT)
-      rpio.write(p, 1)
+      rpio.open(p, rpio.OUTPUT, 0)
     })
+    setInterval(() => {
+      enablePins.forEach((p) => {
+        rpio.write(p, 1)
+      })
+      setTimeout(() => {
+        enablePins.forEach((p) => {
+          rpio.write(p, 0)
+        })
+      }, speed)
+    }, 20)
   }
 
   go(dir, cb) {
@@ -60,6 +72,15 @@ class Driver {
     })
   }
 
+  backwardABit (cb) {
+    console.log('backward a bit')
+    this.backward()
+    setTimeout(() => {
+      this.stop()
+      cb && cb()
+    }, 500)
+  }
+
   // 左转 45C
   left (cb) {
     console.log('turn left')
@@ -93,7 +114,7 @@ class Driver {
     })
     setTimeout(() => {
       cb && cb()
-    }, 1000)
+    }, 500)
   }
 }
 

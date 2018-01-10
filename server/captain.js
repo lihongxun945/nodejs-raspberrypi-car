@@ -1,7 +1,6 @@
 const driver = require('./driver.js')
 const Observer = require('./observer.js')
 const utils = require('./utils.js')
-const SR = require('./sr.js')
 
 class Captain {
   constructor() {
@@ -11,16 +10,18 @@ class Captain {
   }
 
   init () {
-    // this.sr = new SR()
     this.observer = new Observer({
       onObstacle: () => {
         if (!this._start || !this._driving) {
           // already stopped
         } else {
           console.log('on obstacle')
+          // 后退一点，因为停止的时候有惯性
           this._driving = false
           driver.stop(() => {
-            this.go()
+            driver.backwardABit(() => {
+              this.go()
+            })
           })
         }
       }
@@ -28,6 +29,13 @@ class Captain {
   }
 
   go () {
+    if (!this._start) return false
+    // 如果离障碍物太近，那么直接后退一点
+    if (this.observer.tooClose()) {
+      driver.backwardABit(() => {
+        this.go()
+      })
+    }
     this.observer.isAvailable((a) => {
       // 如果前方可以通行，那么就通行
       if (a) {
@@ -48,12 +56,15 @@ class Captain {
     })
   }
 
+  // start auto drive
   start () {
+    console.log('start auto drive')
     this._start = true
     this.go()
   }
 
   stop () {
+    console.log('stop auto drive')
     this._start = false
     this._driving = false
     driver.stop()
