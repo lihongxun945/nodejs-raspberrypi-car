@@ -62,6 +62,4 @@ class Captain {
 
 const captain = new Captain()
 
-captain.start()
-
 module.exports = captain

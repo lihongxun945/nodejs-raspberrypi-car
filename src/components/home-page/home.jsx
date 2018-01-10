@@ -34,12 +34,12 @@ class HomePage extends React.Component {
         </Flex>
         <Flex>
           <FlexItem>
-            <Button type="primary" onClick={ () => this.go(2) }>手动控制</Button>
+            <Button type="primary" onClick={ () => this.startAuto() }>打开自动</Button>
           </FlexItem>
           <FlexItem>
           </FlexItem>
           <FlexItem>
-            <Button type="primary" onClick={ () => this.go(2) }>自动驾驶</Button>
+            <Button type="primary" onClick={ () => this.stopAuto() }>关闭自动</Button>
           </FlexItem>
         </Flex>
         <Footer className={styles.footer}>
@@ -51,6 +51,13 @@ class HomePage extends React.Component {
 
   go(dir) {
     fetch(`/api/go/${dir}`)
+  }
+
+  startAuto () {
+    fetch('/api/auto/start')
+  }
+  stopAuto() {
+    fetch('/api/auto/stop')
   }
 }
 

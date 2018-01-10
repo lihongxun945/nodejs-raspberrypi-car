@@ -19,7 +19,7 @@ class Driver {
 
   init () {
     pins.forEach((p, i) => {
-      rpio.open(p, rpio.OUTPUT)
+      rpio.open(p, rpio.OUTPUT, 0)
     })
     enablePins.forEach((p) => {
       rpio.open(p, rpio.OUTPUT)
