@@ -8,6 +8,7 @@ router.get('/api/go/:dir', (req, res) => {
   const dir = parseInt(req.params.dir)
   console.log(`dir: ${dir}`)
   driver.go(dir)
+  res.send('OK')
 })
 
 module.exports = router
