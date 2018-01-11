@@ -6,6 +6,8 @@ const captain = require('./captain.js')
 
 const router = express.Router()
 
+new SR()
+
 // 手动控制
 router.get('/api/go/:dir', (req, res) => {
   const dir = parseInt(req.params.dir)
