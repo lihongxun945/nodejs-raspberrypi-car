@@ -1,6 +1,12 @@
 @import '../variables.scss';
 
 .homePage {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
   padding: 15px;
   h1 {
     font-size: 1.5rem;
@@ -27,5 +33,7 @@
 }
 
 :global(.weui-btn) {
-  width: 100px!important;
+  height: 60px;
+  line-height: 60px;
+  width: 105px!important;
 }

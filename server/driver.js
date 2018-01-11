@@ -10,13 +10,9 @@ const b = [1, 0, 1, 0]
 const l = [0, 1, 1, 0]
 const r = [1, 0, 0, 1]
 
-
-const speed = 4 // 1~10
-
-const turnDuration = 150 * (20/speed)
-
 class Driver {
   constructor() {
+    this.setSpeed(4)
     this.init()
   }
 
@@ -35,7 +31,7 @@ class Driver {
         enablePins.forEach((p) => {
           rpio.write(p, 0)
         })
-      }, speed)
+      }, this.speed)
     }, 10)
   }
 
@@ -78,7 +74,7 @@ class Driver {
     setTimeout(() => {
       this.stop()
       cb && cb()
-    }, 1000/speed)
+    }, 1000/this.speed)
   }
 
   // 左转 45C
@@ -91,7 +87,7 @@ class Driver {
     setTimeout(() => {
       this.stop()
       cb && cb()
-    }, turnDuration)
+    }, this.turnDuration)
   }
 
   // 右转 45C
@@ -104,7 +100,7 @@ class Driver {
     setTimeout(() => {
       this.stop()
       cb && cb()
-    }, turnDuration)
+    }, this.turnDuration)
   }
 
   stop (cb) {
@@ -115,6 +111,11 @@ class Driver {
     setTimeout(() => {
       cb && cb()
     }, 500)
+  }
+
+  setSpeed(speed) {
+    this.speed = speed
+    this.turnDuration = 150 * (10/this.speed)
   }
 }
 

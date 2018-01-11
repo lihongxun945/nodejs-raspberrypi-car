@@ -23,4 +23,15 @@ router.get('/api/auto/stop', (req, res) => {
   res.send('OK')
 })
 
+router.get('/api/set/speed/:speed', (req, res) => {
+  driver.setSpeed(parseInt(req.params.speed))
+  res.send('OK')
+})
+
+router.get('/api/get/speed/', (req, res) => {
+  res.send({
+    speed: driver.speed
+  })
+})
+
 module.exports = router
