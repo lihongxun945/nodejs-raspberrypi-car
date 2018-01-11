@@ -41,7 +41,7 @@ class Observer {
   }
 
   tooClose () { // 是否已经几乎碰到障碍物
-    return infrared.detect()
+    return infrared.detect() || this.sr.distance < threshold / 2
   }
 }
 
