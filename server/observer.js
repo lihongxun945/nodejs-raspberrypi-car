@@ -6,6 +6,8 @@ const infrared = require('./infrared.js')
 
 const threshold = 50 // 小于这个值，认为碰到障碍物
 
+const servo = require('./servo.js')
+
 class Observer {
   constructor(options) {
     this.options = options || {

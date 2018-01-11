@@ -37,7 +37,7 @@ class SR {
       const c = rpio.read(IN)
       if (!c && last) {
         const duration = (getCurrentTime() - start) / 1000
-        const result = parseInt(duration * 340 * 100 / 1e6 / 2) // 计算距离 cm
+        const result = parseInt(duration * 340 * 100 / 1e6 / 2) - 6 // 计算距离 cm
         if (result >= 2) { // 2cm 以内是杂音
           start = 0 // 只计算第一个返回的声波
           this._caculate(result)
