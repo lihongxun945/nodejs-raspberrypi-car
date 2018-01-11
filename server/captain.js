@@ -35,10 +35,9 @@ class Captain {
       driver.backwardABit(() => {
         this.go()
       })
-    }
-    this.observer.isAvailable((a) => {
+    } else {
       // 如果前方可以通行，那么就通行
-      if (a) {
+      if (this.observer.isAvailable()) {
         driver.forward()
         this._driving = true
       } else {
@@ -53,7 +52,7 @@ class Captain {
           }
         })
       }
-    })
+    }
   }
 
   // start auto drive

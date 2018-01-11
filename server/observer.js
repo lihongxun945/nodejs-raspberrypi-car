@@ -35,8 +35,8 @@ class Observer {
         return;
       }
       // 否则看左右
-      const l = false
-      const r = false
+      let l = false
+      let r = false
       servo.left(() => {
         if (this.isAvailable()) {
           l = true
@@ -46,10 +46,12 @@ class Observer {
             r = true
           }
           // 取结果
-          if (l && !r) return cb(3)
-          if (!l && r) return cb(1)
-          if (!l && !r) return cb(1)
-          return cb([1, 3][utils.rand(2)])
+          servo.reset(() => {
+            if (l && !r) return cb(3)
+            if (!l && r) return cb(1)
+            if (!l && !r) return cb(1)
+            return cb([1, 3][utils.rand(2)])
+          })
         })
       })
 
@@ -57,10 +59,10 @@ class Observer {
     })
   }
 
-  isAvailable (cb) { // 前方是否可以通行
+  isAvailable () { // 前方是否可以通行
     const r = (this.sr.distance > threshold * 2) && (!infrared.detect()) // 可以通行的条件，比障碍物的条件要远一点
     console.log(`is available: ${r}`)
-    cb(r)
+    return r
   }
 
   tooClose () { // 是否已经几乎碰到障碍物

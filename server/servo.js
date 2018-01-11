@@ -24,12 +24,13 @@ class Servo {
       rpio.write(pin, 1)
       timer.setTimeout(() => {
         rpio.write(pin, 0)
-      }, '', '2.15m')
+      }, '', time)
     }, '', '20m')
     setTimeout(() => {
+      console.log('servo clear')
       timer.clearInterval()
       cb && cb()
-    }, 500)
+    }, 1000)
   }
 
   left (cb) {
