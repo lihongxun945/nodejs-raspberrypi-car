@@ -78,7 +78,7 @@ class Driver {
     setTimeout(() => {
       this.stop()
       cb && cb()
-    }, 500)
+    }, 1000/speed)
   }
 
   // 左转 45C

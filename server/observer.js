@@ -35,7 +35,7 @@ class Observer {
   }
 
   isAvailable (cb) { // 前方是否可以通行
-    const r = (this.sr.distance > threshold * 1.5) && (!infrared.detect()) // 可以通行的条件，比障碍物的条件要远一点
+    const r = (this.sr.distance > threshold * 2) && (!infrared.detect()) // 可以通行的条件，比障碍物的条件要远一点
     console.log(`is available: ${r}`)
     cb(r)
   }
