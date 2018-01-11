@@ -11,7 +11,7 @@ const l = [0, 1, 1, 0]
 const r = [1, 0, 0, 1]
 
 
-const speed = 4 // 1~20
+const speed = 4 // 1~10
 
 const turnDuration = 150 * (20/speed)
 
@@ -36,7 +36,7 @@ class Driver {
           rpio.write(p, 0)
         })
       }, speed)
-    }, 20)
+    }, 10)
   }
 
   go(dir, cb) {
