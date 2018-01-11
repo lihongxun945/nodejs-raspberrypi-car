@@ -4,9 +4,9 @@ const utils = require('./utils.js')
 const SR = require('./sr.js')
 const infrared = require('./infrared.js')
 
-const threshold = 50 // 小于这个值，认为碰到障碍物
+const threshold = 40 // 小于这个值，认为碰到障碍物
 
-const servo = require('./servo.js')
+const servo = require('./servo.js') // 舵机
 
 class Observer {
   constructor(options) {
@@ -29,11 +29,32 @@ class Observer {
   }
 
   getAvailableDir (cb) {
-    setTimeout(() => {
-      const d = 1
-      console.log(`available dir: ${d}`)
-      cb(d)
-    }, 2000)
+    servo.reset(() => { // 看前面是否通畅
+      if (this.isAvailable()) {
+        cb(0)
+        return;
+      }
+      // 否则看左右
+      const l = false
+      const r = false
+      servo.left(() => {
+        if (this.isAvailable()) {
+          l = true
+        }
+        servo.right(() => {
+          if (this.isAvailable()) {
+            r = true
+          }
+          // 取结果
+          if (l && !r) return cb(3)
+          if (!l && r) return cb(1)
+          if (!l && !r) return cb(1)
+          return cb([1, 3][utils.rand(2)])
+        })
+      })
+
+
+    })
   }
 
   isAvailable (cb) { // 前方是否可以通行
@@ -43,7 +64,7 @@ class Observer {
   }
 
   tooClose () { // 是否已经几乎碰到障碍物
-    return infrared.detect() || this.sr.distance < threshold / 2
+    return infrared.detect() || this.sr.distance < (threshold / 2)
   }
 }
 

@@ -13,13 +13,13 @@ class Servo {
 
   init () {
     rpio.open(pin, rpio.OUTPUT)
-    this.rotate()
+    this.reset()
   }
 
   // forward: 1.23
   // 0.5 right
   // 2.15 left
-  rotate (time) {
+  rotate (time, cb) {
     const interval = timer.setInterval(() => {
       rpio.write(pin, 1)
       timer.setTimeout(() => {
@@ -27,21 +27,21 @@ class Servo {
       }, '', '2.15m')
     }, '', '20m')
     setTimeout(() => {
-      console.log('clear')
       timer.clearInterval()
+      cb && cb()
     }, 500)
   }
 
-  left () {
-    this.rotate('2.15m')
+  left (cb) {
+    this.rotate('2.15m', cb)
   }
 
-  right () {
-    this.rotate('0.5m')
+  right (cb) {
+    this.rotate('0.5m', cb)
   }
 
-  reset () {
-    this.rotate('1.23m')
+  reset (cb) {
+    this.rotate('1.23m', cb)
   }
 }
 
