@@ -58,6 +58,7 @@ class Captain {
   // start auto drive
   start () {
     console.log('start auto drive')
+    if (this._start) return true
     this._start = true
     this.go()
   }

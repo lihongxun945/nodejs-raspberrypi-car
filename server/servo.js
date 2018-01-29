@@ -42,7 +42,7 @@ class Servo {
   }
 
   reset (cb) {
-    this.rotate('1.23m', cb)
+    this.rotate('1.28m', cb)
   }
 }
 
